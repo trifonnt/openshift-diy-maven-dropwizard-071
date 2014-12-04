@@ -1,0 +1,36 @@
+= interesting
+   Interesting example
+   Dropwizard/Jersey: Missing dependency for method at parameter at index X
+ - http://stackoverflow.com/questions/17996627/dropwizard-jersey-missing-dependency-for-method-at-parameter-at-index-x
+
+   Day 13: Dropwizard–The Awesome Java REST Server Stack
+ - https://blog.openshift.com/day-13-dropwizard-the-awesome-java-rest-server-stack/
+   DIY Java App Server on OpenShift: So Far So Good
+ - http://dmly.github.io/blog/2013/05/01/diy-java-app-server-on-openshift-so-far-so-good/
+
+
+= steps
+-01) Copy example.yml to /target/example.yml
+ - Not needed, done by Maven
+
++01) Build
+$ cd /data/workspaces/eclipse/4.4/interesting/d3soft.dropwizard.example
+$ mvn clean install
+
+
++02) Start
+$ cd /data/workspaces/eclipse/4.4/interesting/d3soft.dropwizard.example
+$ java -jar ./target/d3soft.dropwizard.example-0.0.1-SNAPSHOT.jar server example.yml
+
+
++03) Test URLs
+ + http://localhost:8080/app/ -- Blog
+ + http://localhost:8080/app/hello-world?name=Successful+Dropwizard+User
+ + http://localhost:8080/app/hello-world2/Successful Dropwizard User
+ - http://localhost:8080/app/hello-world3
+
+
++4) Admin port
+ - http://localhost:8080/admin/
+...OR... - depending on .yml configuration
+ - http://localhost:8081/
