@@ -2,11 +2,11 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 # The logic to stop your application should be put in this script.
-if [ -z "$(ps -ef | grep target/diy- | grep -v grep)" ]
+if [ -z "$(ps -ef | grep target/d3soft.dropwizard.example- | grep -v grep)" ]
 then
     client_result "Application is already stopped"
 else
-    kill `ps -ef | grep target/diy- | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
+    kill `ps -ef | grep target/d3soft.dropwizard.example- | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
 echo ""
 echo "==================="
 echo "Trifon - STOP - OK"

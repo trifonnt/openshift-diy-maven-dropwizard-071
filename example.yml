@@ -27,8 +27,8 @@ logging:
   # Logger-specific levels.
   loggers:
 
-    # Sets the level for 'com.example.app' to DEBUG.
-    com.example.app: DEBUG
+    # Sets the level for 'bg.d3soft.dropwizard.example' to DEBUG.
+    bg.d3soft.dropwizard.example: DEBUG
 
     org.hibernate.SQL: ALL
 
