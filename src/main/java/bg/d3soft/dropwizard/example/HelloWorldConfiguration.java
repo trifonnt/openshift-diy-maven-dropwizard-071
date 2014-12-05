@@ -1,12 +1,11 @@
 package bg.d3soft.dropwizard.example;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+
 //import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class HelloWorldConfiguration extends Configuration {
@@ -16,6 +15,9 @@ public class HelloWorldConfiguration extends Configuration {
 
 	@NotEmpty
 	private String defaultName = "Stranger";
+
+	private String authenticationCachePolicy = "";
+
 
 //	@Valid
 //	@NotNull
@@ -38,6 +40,11 @@ public class HelloWorldConfiguration extends Configuration {
 	@JsonProperty
 	public void setDefaultName(String newDefaultName) {
 		defaultName = newDefaultName;
+	}
+
+	@JsonProperty
+	public String getAuthenticationCachePolicy() {
+		return authenticationCachePolicy;
 	}
 
 //	public Template buildTemplate() {

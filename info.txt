@@ -8,6 +8,17 @@
    DIY Java App Server on OpenShift: So Far So Good
  - http://dmly.github.io/blog/2013/05/01/diy-java-app-server-on-openshift-so-far-so-good/
 
+   BasicAuthentication with AngularJS and DropWizard
+ - http://clearthehaze.com/2014/07/basicauthentication-with-angularjs-and-dropwizard/
+
+
+= Dropwizard modules
+   Dropwizard
+ + http://modules.dropwizard.io
+
+   a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. 
+ + https://github.com/federecio/dropwizard-swagger
+
 
 = steps
 -01) Copy example.yml to /target/example.yml

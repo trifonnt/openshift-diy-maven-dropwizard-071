@@ -14,7 +14,7 @@ server:
    connector:
 #   applicationConnectors:
       type: http
-      bindHost: trifon-vm # 127.0.0.1 # @OPENSHIFT_DIY_IP@ # @OPENSHIFT_INTERNAL_IP@
+#      bindHost: trifon-vm # 127.0.0.1 # @OPENSHIFT_DIY_IP@ # @OPENSHIFT_INTERNAL_IP@
       port: 8080
 
 
@@ -34,3 +34,7 @@ logging:
 
   appenders:
     - type: console
+
+
+authenticationCachePolicy:
+  maximumSize=10000, expireAfterAccess=10m

@@ -1,4 +1,4 @@
-package bg.d3soft.dropwizard.example.auth;
+package bg.d3soft.dropwizard.example.auth.oauth;
 
 import com.google.common.base.Optional;
 
@@ -7,8 +7,8 @@ import io.dropwizard.auth.Authenticator;
 import bg.d3soft.dropwizard.example.model.User;
 
 
-public class OAuth2Authenticator implements Authenticator<String, User> {
-
+public class HardcodedOAuth2Authenticator implements Authenticator<String, User> {
+	
 	private String HARDCODED_PASSWORD = "secret";
 
 

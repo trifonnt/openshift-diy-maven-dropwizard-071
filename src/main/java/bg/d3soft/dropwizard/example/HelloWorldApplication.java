@@ -1,7 +1,10 @@
 package bg.d3soft.dropwizard.example;
 
-import bg.d3soft.dropwizard.example.auth.OAuth2Authenticator;
-import bg.d3soft.dropwizard.example.auth.SimpleAuthenticator;
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.cache.CacheBuilderSpec;
+
+import bg.d3soft.dropwizard.example.auth.basic.HardcodedBasicAuthenticator;
+import bg.d3soft.dropwizard.example.auth.oauth.HardcodedOAuth2Authenticator;
 import bg.d3soft.dropwizard.example.cli.MyExampleCommand;
 import bg.d3soft.dropwizard.example.health.DatabaseHealthCheck;
 import bg.d3soft.dropwizard.example.health.TemplateHealthCheck;
@@ -11,7 +14,10 @@ import bg.d3soft.dropwizard.example.resources.HelloWorldResourcePathParam;
 import bg.d3soft.dropwizard.example.resources.HelloWorldSecretResource;
 import bg.d3soft.dropwizard.example.resources.IndexResource;
 import io.dropwizard.Application;
+import io.dropwizard.auth.Authenticator;
+import io.dropwizard.auth.CachingAuthenticator;
 import io.dropwizard.auth.basic.BasicAuthProvider;
+import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -72,7 +78,14 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
 
 		// Authentication - BASIC
-		environment.jersey().register(new BasicAuthProvider<User>(new SimpleAuthenticator(), "SUPER SECRET STUFF"));
+		HardcodedBasicAuthenticator authenticator = new HardcodedBasicAuthenticator();
+		Authenticator<BasicCredentials, User> cachedAuthenticator = null;
+////	cachedAuthenticator = CachingAuthenticator<BasicCredentials, User>.wrap(authenticator, configuration.getAuthenticationCachePolicy());
+		CacheBuilderSpec cacheBuilderSpec = CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy());
+		cachedAuthenticator = new CachingAuthenticator<BasicCredentials, User>(new MetricRegistry(), authenticator, cacheBuilderSpec);
+		environment.jersey().register(new BasicAuthProvider<User>(cachedAuthenticator, "SUPER SECRET STUFF"));
+		// Authentication - BASIC
+//		environment.jersey().register(new BasicAuthProvider<User>(authenticator, "SUPER SECRET STUFF"));
 	
 		// Authentication - OAuth2 - NOT WORKING YET
 //		environment.jersey().register(new OAuthProvider<User>(new OAuth2Authenticator(), "SUPER SECRET STUFF"));
