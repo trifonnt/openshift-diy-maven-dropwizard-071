@@ -8,8 +8,26 @@
    DIY Java App Server on OpenShift: So Far So Good
  - http://dmly.github.io/blog/2013/05/01/diy-java-app-server-on-openshift-so-far-so-good/
 
+== Authentication
    BasicAuthentication with AngularJS and DropWizard
  - http://clearthehaze.com/2014/07/basicauthentication-with-angularjs-and-dropwizard/
+
+   How to do Basic Authentication of a resource in Dropwizard
+ + http://stackoverflow.com/questions/20662871/how-to-do-basic-authentication-of-a-resource-in-dropwizard
+
+   Custom filter drop wizard with database information
+ + http://stackoverflow.com/questions/23222292/custom-filter-drop-wizard-with-database-information
+
+== Dropwizard JUnit testing
+   All-in-one Test Environments With JUnit
+ - http://www.tomakehurst.com/all-in-one-test-environments-with-junit/
+
+== CORS
+   CORS for Dropwizard 0.7.x
+ - http://jitterted.com/tidbits/2014/09/12/cors-for-dropwizard-0-7-x/
+
+   Handling CORS in Dropwizard and Jetty
+ - http://jitterted.com/tidbits/2014/04/04/handling-cors-in-dropwizard-and-jetty/
 
 
 = Dropwizard modules

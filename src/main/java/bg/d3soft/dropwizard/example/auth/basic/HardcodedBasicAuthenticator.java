@@ -16,7 +16,7 @@ public class HardcodedBasicAuthenticator implements Authenticator<BasicCredentia
 	private String HARDCODED_PASSWORD = "secret";
 
 
-//	@Override
+	@Override
 	public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
 		if (HARDCODED_PASSWORD.equals(credentials.getPassword()) 
 				&& HARDCODED_USERNAME.equals(credentials.getUsername())

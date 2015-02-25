@@ -2,6 +2,8 @@ package bg.d3soft.dropwizard.example;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.cache.CacheBuilderSpec;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.server.linking.LinkFilter;
 
 import bg.d3soft.dropwizard.example.auth.basic.HardcodedBasicAuthenticator;
 import bg.d3soft.dropwizard.example.auth.oauth.HardcodedOAuth2Authenticator;
@@ -14,16 +16,20 @@ import bg.d3soft.dropwizard.example.resources.HelloWorldResourcePathParam;
 import bg.d3soft.dropwizard.example.resources.HelloWorldSecretResource;
 import bg.d3soft.dropwizard.example.resources.IndexResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.CachingAuthenticator;
-import io.dropwizard.auth.basic.BasicAuthProvider;
+import io.dropwizard.auth.basic.BasicAuthFactory;
 import io.dropwizard.auth.basic.BasicCredentials;
-import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerDropwizard;
 
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+
+	private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
+
 
 	@Override
 	public String getName() {
@@ -35,7 +41,20 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 		// CLI commands
 		bootstrap.addCommand(new MyExampleCommand());
 
-		// Asset Bundles
+		// Swagger
+		swaggerDropwizard.onInitialize( bootstrap );
+
+		// Asset Bundles - TODO when we want caching
+//		CacheBuilderSpec cacheBuilderSpec = null;
+//		cacheBuilderSpec = (System.getenv("FILE_CACHE_ENABLED") == null) ? CacheBuilderSpec.parse("maximumSize=0") : AssetsBundle.DEFAULT_CACHE_SPEC;
+//		cacheBuilderSpec = CacheBuilderSpec.parse("maximumSize=0");
+//		bootstrap.addBundle(new AssetsBundle("/assets/css", cacheBuilderSpec, "/css"));
+
+		// Serve anything under /assets/app inside my JAR file under the URL pattern /,
+		// with index.html as the default file. This bundle will be named static, but name can be changed to whatever name you like.
+		bootstrap.addBundle(new AssetsBundle("/assets/web", "/", "index.html", "static"));    // In order to work properly: environment.jersey().setUrlPattern("/api/*");
+//		bootstrap.addBundle(new AssetsBundle("/assets/web", "/web", "index.html", "static")); // !!!old!!!
+		
 //		bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
 //		bootstrap.addBundle(new AssetsBundle("/assets/js", "/js", null, "js"));
 //		bootstrap.addBundle(new AssetsBundle("/assets/fonts", "/fonts", null, "fonts"));
@@ -43,6 +62,17 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
 	@Override
 	public void run(HelloWorldConfiguration configuration, Environment environment) {
+		// Register Jersey LinkFilter
+		environment.jersey().property(ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, LinkFilter.class);
+
+		//   Asset bundles not able to be served from root path. #661 
+		// - https://github.com/dropwizard/dropwizard/issues/661
+		environment.jersey().setUrlPattern("/api/*");
+
+		// Swagger
+		swaggerDropwizard.onRun(configuration, environment, "localhost"); // TODO - set proper hostname
+//		swaggerDropwizard.onRun(configuration, environment);
+
 		// Health check - Template
 		final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
 		environment.healthChecks().register("template", healthCheck);
@@ -78,17 +108,21 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
 
 		// Authentication - BASIC
+		String realmName = "SUPER SECRET STUFF";
 		HardcodedBasicAuthenticator authenticator = new HardcodedBasicAuthenticator();
 		Authenticator<BasicCredentials, User> cachedAuthenticator = null;
 ////	cachedAuthenticator = CachingAuthenticator<BasicCredentials, User>.wrap(authenticator, configuration.getAuthenticationCachePolicy());
 		CacheBuilderSpec cacheBuilderSpec = CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy());
 		cachedAuthenticator = new CachingAuthenticator<BasicCredentials, User>(new MetricRegistry(), authenticator, cacheBuilderSpec);
-		environment.jersey().register(new BasicAuthProvider<User>(cachedAuthenticator, "SUPER SECRET STUFF"));
+		environment.jersey().register(new BasicAuthFactory<User>(cachedAuthenticator, realmName, User.class));
 		// Authentication - BASIC
-//		environment.jersey().register(new BasicAuthProvider<User>(authenticator, "SUPER SECRET STUFF"));
+//		environment.jersey().register(new BasicAuthProvider<User>(authenticator, realmName));
 	
 		// Authentication - OAuth2 - NOT WORKING YET
-//		environment.jersey().register(new OAuthProvider<User>(new OAuth2Authenticator(), "SUPER SECRET STUFF"));
+//		environment.jersey().register(new OAuthProvider<User>(new OAuth2Authenticator(), realmName));
+
+		// Swagger
+		swaggerDropwizard.onRun(configuration, environment, "localhost");
 	}
 
 	public static void main(String[] args) throws Exception {

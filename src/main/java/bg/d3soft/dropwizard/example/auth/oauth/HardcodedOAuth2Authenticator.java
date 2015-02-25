@@ -12,6 +12,7 @@ public class HardcodedOAuth2Authenticator implements Authenticator<String, User>
 	private String HARDCODED_PASSWORD = "secret";
 
 
+	@Override
 	public Optional<User> authenticate(String credentials) throws AuthenticationException {
 		if (HARDCODED_PASSWORD.equals( credentials )) {
 			return Optional.of(new User(1, credentials) );

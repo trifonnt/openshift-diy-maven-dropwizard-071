@@ -1,0 +1,19 @@
+= Projects/Services
+-01) Environment variable service
+   Twelve-Factor Applications with Consul
+ - https://www.hashicorp.com/blog/twelve-factor-consul.html
+
+== ORIGINAL
+$ curl -X PUT -d 'variable_value' http://localhost:8500/v1/kv/foo/enabled
+
+== Trifon - preferred
+                         /<organization>/<group>/<application>/<environment[DEV/QA/STAGE/PROD]>/.../.../variable
+$ curl -X POST -d 'variable_value' http://localhost:8500/kv/d3soft/HQ/bms/prod/foo/enabled
+$ curl -X GET                      http://localhost:8500/kv/d3soft/HQ/bms/prod/foo/enabled
+  variable_value
+$ curl -X DELETE http://localhost:8500/kv/d3soft/HQ/bms/prod/foo/enabled
+  curl -X DELETE http://localhost:8500/kv/d3soft/HQ/bms/prod/foo/
+  curl -X DELETE http://localhost:8500/kv/d3soft/HQ/bms/prod/
+
+
+-02) 
