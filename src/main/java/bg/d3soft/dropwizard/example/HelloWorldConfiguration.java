@@ -11,38 +11,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class HelloWorldConfiguration extends Configuration {
 
 	@NotEmpty
+	@JsonProperty
 	private String template;
 
 	@NotEmpty
+	@JsonProperty
 	private String defaultName = "Stranger";
 
+	@JsonProperty
 	private String authenticationCachePolicy = "";
 
 
 //	@Valid
 //	@NotNull
+//	@JsonProperty("database")
 //	private DataSourceFactory database = new DataSourceFactory();
 
 
-	@JsonProperty
 	public String getTemplate() {
 		return template;
 	}
-	@JsonProperty
 	public void setTemplate(String newTemplate) {
 		template = newTemplate;
 	}
 
-	@JsonProperty
 	public String getDefaultName() {
 		return defaultName;
 	}
-	@JsonProperty
 	public void setDefaultName(String newDefaultName) {
 		defaultName = newDefaultName;
 	}
 
-	@JsonProperty
 	public String getAuthenticationCachePolicy() {
 		return authenticationCachePolicy;
 	}
@@ -51,11 +50,9 @@ public class HelloWorldConfiguration extends Configuration {
 //		return new Template(template, defaultName);
 //	}
 
-//	@JsonProperty("database")
 //	public DataSourceFactory getDataSourceFactory() {
 //		return database;
 //	}
-//	@JsonProperty("database")
 //	public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
 //		this.database = dataSourceFactory;
 //	}

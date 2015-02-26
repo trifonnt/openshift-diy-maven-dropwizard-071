@@ -64,7 +64,7 @@ public class HelloWorldDropwizardApplication extends Application<HelloWorldConfi
 		// Register Jersey LinkFilter
 		environment.jersey().property(ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, LinkFilter.class);
 
-		//   Asset bundles not able to be served from root path. #661 
+		//   Asset bundles not able to be served from root path.
 		// - https://github.com/dropwizard/dropwizard/issues/661
 		environment.jersey().setUrlPattern("/api/*");
 
