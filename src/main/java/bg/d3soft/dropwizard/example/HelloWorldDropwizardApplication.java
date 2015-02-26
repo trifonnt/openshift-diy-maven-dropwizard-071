@@ -1,32 +1,31 @@
 package bg.d3soft.dropwizard.example;
 
-import com.codahale.metrics.MetricRegistry;
-import com.google.common.cache.CacheBuilderSpec;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.server.linking.LinkFilter;
-
+import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.auth.Authenticator;
+import io.dropwizard.auth.CachingAuthenticator;
+//import io.dropwizard.auth.basic.BasicAuthFactory; // 0.8.x
+import io.dropwizard.auth.basic.BasicAuthProvider; // 0.7.x
+import io.dropwizard.auth.basic.BasicCredentials;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerDropwizard;
 import bg.d3soft.dropwizard.example.auth.basic.HardcodedBasicAuthenticator;
-import bg.d3soft.dropwizard.example.auth.oauth.HardcodedOAuth2Authenticator;
 import bg.d3soft.dropwizard.example.cli.MyExampleCommand;
-import bg.d3soft.dropwizard.example.health.DatabaseHealthCheck;
 import bg.d3soft.dropwizard.example.health.TemplateHealthCheck;
 import bg.d3soft.dropwizard.example.model.User;
 import bg.d3soft.dropwizard.example.resources.HelloWorldResource;
 import bg.d3soft.dropwizard.example.resources.HelloWorldResourcePathParam;
 import bg.d3soft.dropwizard.example.resources.HelloWorldSecretResource;
 import bg.d3soft.dropwizard.example.resources.IndexResource;
-import io.dropwizard.Application;
-import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.auth.Authenticator;
-import io.dropwizard.auth.CachingAuthenticator;
-import io.dropwizard.auth.basic.BasicAuthFactory;
-import io.dropwizard.auth.basic.BasicCredentials;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-import io.federecio.dropwizard.swagger.SwaggerDropwizard;
+
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.cache.CacheBuilderSpec;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.server.linking.LinkFilter;
 
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+public class HelloWorldDropwizardApplication extends Application<HelloWorldConfiguration> {
 
 	private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 
@@ -114,19 +113,19 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 ////	cachedAuthenticator = CachingAuthenticator<BasicCredentials, User>.wrap(authenticator, configuration.getAuthenticationCachePolicy());
 		CacheBuilderSpec cacheBuilderSpec = CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy());
 		cachedAuthenticator = new CachingAuthenticator<BasicCredentials, User>(new MetricRegistry(), authenticator, cacheBuilderSpec);
-		environment.jersey().register(new BasicAuthFactory<User>(cachedAuthenticator, realmName, User.class));
+		
+//		environment.jersey().register(new BasicAuthFactory<User>(cachedAuthenticator, realmName, User.class)); // 0.8.x
+		environment.jersey().register(new BasicAuthProvider<User>(cachedAuthenticator, realmName)); // 0.7.x
+
 		// Authentication - BASIC
 //		environment.jersey().register(new BasicAuthProvider<User>(authenticator, realmName));
 	
 		// Authentication - OAuth2 - NOT WORKING YET
 //		environment.jersey().register(new OAuthProvider<User>(new OAuth2Authenticator(), realmName));
-
-		// Swagger
-		swaggerDropwizard.onRun(configuration, environment, "localhost");
 	}
 
 	public static void main(String[] args) throws Exception {
-		new HelloWorldApplication()
+		new HelloWorldDropwizardApplication()
 			.run( args );
 	}
 }
