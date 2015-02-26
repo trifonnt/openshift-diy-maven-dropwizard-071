@@ -37,37 +37,3 @@
    a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. 
  + https://github.com/federecio/dropwizard-swagger
 
-
-= steps
--01) Copy example.yml to /target/example.yml
- - Not needed, done by Maven
-
-+01) Build
-$ cd /data/workspaces/eclipse/4.4/interesting/d3soft.dropwizard.example
-$ mvn clean install
-
-
-+02) Start
-$ cd /data/workspaces/eclipse/4.4/interesting/d3soft.dropwizard.example
-$ java -jar ./target/d3soft.dropwizard.example-0.0.1-SNAPSHOT.jar server example.yml
-
-
-+03) Test URLs
-== localhost
- + http://localhost:8080/app/ -- Blog
- + http://localhost:8080/app/hello-world?name=Successful+Dropwizard+User
- + http://localhost:8080/app/hello-world2/Successful%20Dropwizard%20User
-   http://localhost:8080/app/hello-world2/Successful Dropwizard User
- - http://localhost:8080/app/hello-world3
-== http://app-domain.rhcloud.com/
- + http://dev-trifon.rhcloud.com/app/ -- Blog
- + http://dev-trifon.rhcloud.com/app/hello-world?name=Successful+Dropwizard+User
- + http://dev-trifon.rhcloud.com/app/hello-world2/Successful%20Dropwizard%20User
-   http://dev-trifon.rhcloud.com/app/hello-world2/Successful Dropwizard User
- - http://dev-trifon.rhcloud.com/app/hello-world3
-
-
-+4) Admin port
- - http://localhost:8080/admin/
-...OR... - depending on .yml configuration
- - http://localhost:8081/
