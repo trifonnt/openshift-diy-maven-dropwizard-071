@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="1" author="trifon">
+		<createSequence sequenceName="bms_user_id_seq" startValue="1" incrementBy="1"/>
+
+		<createTable tableName="bms_user">
+			<!--column name="id" type="int" autoIncrement="true"-->
+			<column name="id" type="int">
+				<constraints primaryKey="true" nullable="false" primaryKeyName="bms_user_pk"/>
+			</column>
+			<column name="version" type="int" defaultValueNumeric="0"/>
+
+			<column name="created" type="datetime">
+				<constraints nullable="true"/>
+			</column>
+			<column name="last_updated" type="datetime">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="username" type="varchar(255)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="bms_user_username_unq"/>
+			</column>
+		</createTable>
+		<!-- addAutoIncrement tableName="bms_user" columnName="id"/-->
+		<addDefaultValue tableName="bms_user" columnName="id" defaultValueSequenceNext="bms_user_id_seq"/>
+
+		<rollback>
+			<dropSequence sequenceName="bms_user_id_seq"/>
+			<dropTable tableName="bms_user"/>
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
