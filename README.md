@@ -1,7 +1,7 @@
-Dropwizard-0.7.1 with Swagger on OpenShift-diy cartridge
+Dropwizard-0.7.1 with Swagger on OpenShift-DIY cartridge
 ==================================
 
-Steps to build and start
+Steps to build and start from command line
 =====
 +01) Build
 

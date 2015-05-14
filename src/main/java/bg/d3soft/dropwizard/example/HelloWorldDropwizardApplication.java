@@ -43,8 +43,8 @@ public class HelloWorldDropwizardApplication extends Application<HelloWorldConfi
 		// Swagger
 		swaggerDropwizard.onInitialize( bootstrap );
 
-		// RAML
-		bootstrap.addBundle(net.ozwolf.raml.RamlView.bundle("api-specs/example-api-spec.original.raml"));
+		// RAML - TODO - uncomment when new Maven repository is found!
+//		bootstrap.addBundle(net.ozwolf.raml.RamlView.bundle("api-specs/example-api-spec.original.raml"));
 
 		// Asset Bundles - TODO when we want caching
 //		CacheBuilderSpec cacheBuilderSpec = null;
@@ -73,55 +73,8 @@ ERROR [2015-02-26 09:01:36,988] io.dropwizard.jersey.errors.LoggingExceptionMapp
 ! at java.util.Vector$Itr.next(Vector.java:1133) ~[na:1.7.0_75]
 ! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:118) ~[jersey-server-linking-1.18.3.jar:1.18.3]
 ! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
+...
 ! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:114) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:119) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:119) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:119) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:119) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processMember(RefProcessor.java:133) ~[jersey-server-linking-1.18.3.jar:1.18.3]
-! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:125) ~[jersey-server-linking-1.18.3.jar:1.18.3]
 ! at com.sun.jersey.server.linking.impl.RefProcessor.processLinks(RefProcessor.java:78) ~[jersey-server-linking-1.18.3.jar:1.18.3]
 ! at com.sun.jersey.server.linking.LinkFilter.filter(LinkFilter.java:82) ~[jersey-server-linking-1.18.3.jar:1.18.3]
 ! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1494) [jersey-server-1.18.1.jar:1.18.1]

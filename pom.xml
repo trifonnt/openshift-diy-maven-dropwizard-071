@@ -33,10 +33,20 @@
 			<name>Sonatype Nexus Snapshots</name>
 			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
+		<repository>
+			<id>bodar</id>
+			<name>Bodar Repository</name>
+			<url>http://repo.bodar.com/</url>
+		</repository>
+		<repository>
+			<id>mulesoft-releases</id>
+			<name>MuleSoft Releases Repository</name>
+			<url>http://repository.mulesoft.org/releases/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
-		<dependency>
+		<!--dependency>
 			<groupId>net.ozwolf</groupId>
 			<artifactId>dropwizard-raml-view</artifactId>
 			<version>2.1.1</version>
@@ -54,7 +64,7 @@
 					<artifactId>jackson-annotations</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>io.dropwizard</groupId>
 			<artifactId>dropwizard-core</artifactId>
@@ -95,6 +105,33 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<!--resource>
+				<filtering>false</filtering>
+				<directory>src/patch/dropwizard-swagger/resources</directory>
+			</resource-->
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/web/resources</directory>
+				<includes>
+					<include>**/**.*</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>*.rb</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -191,6 +228,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 <!-- 
 	FindBugs Maven Plugin Tutorial
 - http://www.petrikainulainen.net/programming/maven/findbugs-maven-plugin-tutorial/

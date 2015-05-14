@@ -1,5 +1,5 @@
 = Projects/Services
--01) Environment variable service
+-01) Service: Environment variable
    Twelve-Factor Applications with Consul
  - https://www.hashicorp.com/blog/twelve-factor-consul.html
 
